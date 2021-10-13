@@ -6,10 +6,8 @@ With Docker, **you create and manage Containers - basically packages of code and
 - it should be easy to share a common development environment/setup with new people
 
 ## Containers
-![img.png](../Airflow/Docker/img.png)
 
 ## Images
-![img_1.png](../Airflow/Docker/img_1.png)
 
 Containers in the end are small packages, so a container is there's a running unit of software. It is the thing which you run in the end. But when working with Docker, we also need dissolver concept called Images, because images will be the templates, the blueprints for containers, it's actually the image, which will contain the code and the required tools to execute the code, and then it's the container that then runs and executes the code.
 
