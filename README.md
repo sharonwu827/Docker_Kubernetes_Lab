@@ -1,65 +1,56 @@
 # Docker
 
-With Docker, **you create and manage Containers - basically packages of code and tools required to run that code**. These containers allow you to run your programs in a predictable, environment-independent way - no matter where you need to run it. For modern DevOps but also for local development - on your own or in a team - this is a winner feature since you will no longer have any "but it worked on my machine" discussions. It works inside of a container, hence it works everywhere!
+Why we using docker
 
-- we want to have the exact same environment for development and production, this ensures that it works exactly as tested
-- it should be easy to share a common development environment/setup with new people
+- low impact on OS, work really fast
+- can share, rebuild and distribute very easily (it should be easy to share a common development environment/setup with new people)
+- we can have the exact same environment for development and production, this ensures that it works exactly as tested
 
 ## Containers
 
+Containers are running instances of Images. When you create a container (via `docker run` ), a thin read-write layer is added on top of the Image. 
+
+Multiple Containers can therefore be started based on one and the same Image. All Containers run in isolation, i.e. they don't share any application state or written data. You need to create and start a Container to start the application which is inside of a Container. So it's containers which are in the end executed - both in development and production.
+
+
 ## Images
+![img_2.png](img_2.png)
 
-Containers in the end are small packages, so a container is there's a running unit of software. It is the thing which you run in the end. But when working with Docker, we also need dissolver concept called Images, because images will be the templates, the blueprints for containers, it's actually the image, which will contain the code and the required tools to execute the code, and then it's the container that then runs and executes the code.
-
-![img.png](../Docker_Kubernetes/img.png)
+- **images will be the templates, the blueprints for containers, it's actually the image, which will contain the code and the required tools to execute the code, and then it's the container that then runs and executes the code.**
+- Images are either pre-built (e.g. official Images you find on DockerHub) or you build your own Images by defining a `Dockerfile`.
+    - `Dockerfiles` contain **instructions** which are executed when an image is built ( `docker build .`)
+- **Images are locked and finished once you built them**. **Everything in the images is read only then,** and you can't edit it from the outside by simply updating your code. The image doesn't care about the past. Once this copy operation is done, you can change your outside code however you want. You can even delete it and the image will not be affected. You need to rebuild to pick up external changes and basically copy all the updated code into the image. So therefore, what we need to do here is we need to run `docker build .` again to rebuild this image and therefore to build a new image in the end.
 
 ## Two types of external data storages
 
-![img_1.png](../Docker_Kubernetes/img_1.png)
+### Volumes - managed by docker
 
-### Volumes
+**Volumes are folders (and files) managed on your host machine which are connected to folders / files inside of a container.** There are two types of Volumes:
 
-Volumes are folders (and files) managed on your host machine which are connected to folders /
-files inside of a container.
-There are two types of Volumes:
-- Anonymous Volumes: Created via `-v /some/path/in/container` and removed
-automatically when a container is removed because of --rm added on the docker run
-command
-- Named Volumes: Created via -v some-name:/some/path/in/container and NOT
-removed automatically
+- Anonymous Volumes
+    - created specifically for a single container
+    - survives when container shutdown/restart unless it is removed (`—rm` is used)
+    - cannot share across containers
+    - since it is anonymous. it cannot be reused
+- Named Volumes:
+    - we cannot create named volumes inside a docker file, not attached to any specific container
+    - can share across containers
+    - survive even we remove the container
+    
+    Since data is not just written in the container but also on your host machine, the data survives even if a container is removed (because the Named Volume isn't removed in that case). Hence you can use Named Volumes to persist container data (e.g. log files, uploaded files, database files etc).
+    
 
-With Volumes, data can be passed into a container (if the folder on the host machine is not
-empty) and it can be saved when written by a container (changes made by the container are
-reflected on your host machine).
+### Bind Mounts - managed by you
 
-Volumes are created and managed by Docker - as a developer, you don't necessarily know
-where exactly the folders are stored on your host machine. Because the data stored in there is
-not meant to be viewed or edited by you - use "Bind Mounts" if you need to do that!
-Instead, especially Named Volumes can help you with persisting data.
+The developer, set the path on the host machine that should be connected to some path inside of a Container.
 
-Since data is not just written in the container but also on your host machine, the data survives
-even if a container is removed (because the Named Volume isn't removed in that case). Hence
-you can use Named Volumes to persist container data (e.g. log files, uploaded files, database files
-etc).
+The path in front of the : (i.e. the path on your host machine, to the folder that should be shared with the container) has to be an **absolute path** when using -v on the docker run command. 
 
-### Bind Mounts
+Bind Mounts are very useful for sharing data with a Container which might change whilst the container is running - e.g. your source code that you want to share with the Container running your development environment.
 
-Bind Mounts are very similiar to Volumes - the key difference is, that you, the developer, set the
-path on your host machine that should be connected to some path inside of a Container.
-You do that via `-v /absolute/path/on/your/host/machine:/some/path/inside/of/container`.
+Don't use Bind Mounts if you just want to persist data - Named Volumes should be used for that (exception: You want to be able to inspect the data written during development).
 
-The path in front of the : (i.e. the path on your host machine, to the folder that should be shared
-with the container) has to be an absolute path when using -v on the docker run command.
-Bind Mounts are very useful for sharing data with a Container which might change whilst the
-container is running - e.g. your source code that you want to share with the Container running
-your development environment.
-
-Don't use Bind Mounts if you just want to persist data - Named Volumes should be used for
-that (exception: You want to be able to inspect the data written during development).
-
-In general, Bind Mounts are a great tool during development - they're not meant to be used in
-production (since you're container should run isolated from it's host machine)
-
+In general, Bind Mounts are a great tool during development - they're not meant to be used in production (since you're container should run isolated from it's host machine)
 
 ## Key Docker Commands
 ```
