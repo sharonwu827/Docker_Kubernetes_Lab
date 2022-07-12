@@ -14,7 +14,7 @@ Containers are running instances of Images. When you create a container (via `do
 
 Multiple Containers can therefore be started based on one and the same Image. All Containers run in isolation, i.e. they don't share any application state or written data. You need to create and start a Container to start the application which is inside of a Container. So it's containers which are in the end executed - both in development and production.
 
-## Images
+### Images
 
 ![img_3.png](img_3.png)
 
@@ -23,7 +23,7 @@ Multiple Containers can therefore be started based on one and the same Image. Al
     - `Dockerfiles` contain **instructions** which are executed when an image is built ( `docker build .`)
 - **Images are locked and finished once you built them**. **Everything in the images is read only then,** and you can't edit it from the outside by simply updating your code. The image doesn't care about the past. Once this copy operation is done, you can change your outside code however you want. You can even delete it and the image will not be affected. You need to rebuild to pick up external changes and basically copy all the updated code into the image. So therefore, what we need to do here is we need to run `docker build .` again to rebuild this image and therefore to build a new image in the end.
 
-## Two types of external data storages
+### Two types of external data storages
 
 ### Volumes - managed by docker
 
