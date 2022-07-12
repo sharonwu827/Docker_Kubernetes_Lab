@@ -1,11 +1,15 @@
 # Docker
-Why we using docker
+
+An open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. 
+
+## Why we using docker
 
 - low impact on OS, work really fast
 - can share, rebuild and distribute very easily (it should be easy to share a common development environment/setup with new people)
 - we can have the exact same environment for development and production, this ensures that it works exactly as tested
 
-## Containers
+## Terms
+### Containers
 Containers are running instances of Images. When you create a container (via `docker run` ), a thin read-write layer is added on top of the Image. 
 
 Multiple Containers can therefore be started based on one and the same Image. All Containers run in isolation, i.e. they don't share any application state or written data. You need to create and start a Container to start the application which is inside of a Container. So it's containers which are in the end executed - both in development and production.
