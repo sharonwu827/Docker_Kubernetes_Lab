@@ -8,7 +8,8 @@ An open platform for developing, shipping, and running applications. Docker enab
 - can share, rebuild and distribute very easily (it should be easy to share a common development environment/setup with new people)
 - we can have the exact same environment for development and production, this ensures that it works exactly as tested
 
-## Terms
+## Glossary
+
 ### Containers
 Containers are running instances of Images. When you create a container (via `docker run` ), a thin read-write layer is added on top of the Image. 
 
@@ -53,6 +54,7 @@ Bind Mounts are very useful for sharing data with a Container which might change
 Don't use Bind Mounts if you just want to persist data - Named Volumes should be used for that (exception: You want to be able to inspect the data written during development).
 
 In general, Bind Mounts are a great tool during development - they're not meant to be used in production (since you're container should run isolated from it's host machine)
+
 
 ## Key Docker Commands
 ```
