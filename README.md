@@ -2,7 +2,7 @@
 
 An open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. 
 
-## Why we using docker
+## Why we are using docker
 
 - low impact on OS, work really fast
 - can share, rebuild and distribute very easily (it should be easy to share a common development environment/setup with new people)
@@ -16,8 +16,6 @@ Containers are running instances of Images. When you create a container (via `do
 Multiple Containers can therefore be started based on one and the same Image. All Containers run in isolation, i.e. they don't share any application state or written data. You need to create and start a Container to start the application which is inside of a Container. So it's containers which are in the end executed - both in development and production.
 
 ### Images
-
-![img_3.png](img_3.png)
 
 - **images will be the templates, the blueprints for containers, it's actually the image, which will contain the code and the required tools to execute the code, and then it's the container that then runs and executes the code.**
 - Images are either pre-built (e.g. official Images you find on DockerHub) or you build your own Images by defining a `Dockerfile`.
@@ -57,11 +55,34 @@ In general, Bind Mounts are a great tool during development - they're not meant 
 
 
 ## Key Docker Commands
+
+### create and run a container from an Image
+
+```python
+docker run <image namge>
+#docker run <image namge> command! default command override
+docker run busybox ls
+docker run busybox echo how are you
+docker run busybox ping google.com # show latency
+```
+### List all running containers
+
+```python
+#check the container that are currently running
+docker ps
+#check the container that docker created including the stopped ones
+docker ps --all
+```
+
+
+
+
+
+
 ```
 # https://docs.docker.com/engine/reference/run/
 # Build a Dockerfile and create your own Image based on the file
-docker build .
-# pull image, if image doesn't exist locally, it'll find it on DockerHub
+docker build. pull image, if image doesn't exist locally, it'll find it on DockerHub
 docker run node
 #Pull (download) an image from DockerHub
 docker pull node # this is done automatically if you just docker run node and the image wasn't pulled before
