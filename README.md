@@ -56,9 +56,11 @@ In general, Bind Mounts are a great tool during development - they're not meant 
 
 ## Key Docker Commands
 
-### create and run a container from an Image
-
+### Create and run a container from an Image
 ```python
+# docker run = docker create + docker start
+docker create busybox echo hi there
+docker start containerid
 docker run <image namge>
 #docker run <image namge> command! default command override
 docker run busybox ls
@@ -66,19 +68,12 @@ docker run busybox echo how are you
 docker run busybox ping google.com # show latency
 ```
 ### List all running containers
-
 ```python
-#check the container that are currently running
-docker ps
-#check the container that docker created including the stopped ones
-docker ps --all
+
+
+
+
 ```
-
-
-
-
-
-
 ```
 # https://docs.docker.com/engine/reference/run/
 # Build a Dockerfile and create your own Image based on the file
@@ -93,6 +88,8 @@ docker push IMAGE
 docker ps
 #check the container that docker created including the stopped ones
 docker ps -a
+#Get logs from a container
+docker logs <container id>
 
 #List all locally stored images
 docker images
@@ -138,3 +135,7 @@ docker volume rm VOL_NAME
 # Remove all unused Volumes
 docker volume prune
 ```
+
+
+### Appendix
+- https://hub.docker.com/search?q=
