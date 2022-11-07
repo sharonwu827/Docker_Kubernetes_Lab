@@ -1,5 +1,5 @@
 # specify a base image
-FROM node:14-alpine
+FROM node:6.14-alpine
 # install some depenendencies
 RUN npm install
 # default command
