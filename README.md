@@ -136,7 +136,6 @@ docker volume rm VOL_NAME
 docker volume prune
 ```
 
-
 ### Appendix
 - Find the images: https://hub.docker.com/search?q=
 - 
