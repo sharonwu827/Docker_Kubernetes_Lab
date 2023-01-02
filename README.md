@@ -127,7 +127,6 @@ docker run -v /path/in/container IMAGE :
 docker run -v some-name:/path/in/container IMAGE
 #  Create a Bind Mount and connect a local path on your host machine to some path in the Container
 docker run -v /path/on/your/host/machine:path/in/container IMAGE
-
 # List all currently active / stored Volumes (by all Containers)
 docker volume ls
 # Remove a Volume by it's name (or ID)
