@@ -56,85 +56,8 @@ In general, Bind Mounts are a great tool during development - they're not meant 
 
 ## Key Docker Commands
 
-### Create and run a container from an Image
-```python
-# docker run = docker create + docker start
-docker create busybox echo hi there
-docker start containerid
-docker run <image namge>
-#docker run <image namge> command! default command override
-docker run busybox ls
-docker run busybox echo how are you
-docker run busybox ping google.com # show latency
-```
-### List all running containers
-```python
-
-
-
-
-```
-```
-# https://docs.docker.com/engine/reference/run/
-# Build a Dockerfile and create your own Image based on the file
-docker build. pull image, if image doesn't exist locally, it'll find it on DockerHub
-docker run node
-#Pull (download) an image from DockerHub
-docker pull node # this is done automatically if you just docker run node and the image wasn't pulled before
-# Push an image to DockerHub (or another registry) - the image name/tag must include the repository name/ url
-docker push IMAGE
-
-#check the container that are currently running
-docker ps
-#check the container that docker created including the stopped ones
-docker ps -a
-#Get logs from a container
-docker logs <container id>
-
-#List all locally stored images
-docker images
-
-# remove images (IMAGE ID or image name)
-docker rmi 3ac38cc5cadf
-# Remove all dangling images (untagged images)
-docker image prune 
-# Remove all locally stored images
-docker image prune -a 
-#stop container
-docker stop compassionate_payne
-# remove containers with name compassionate_payne(must stop first before remove)
-docker rm compassionate_payne
-# Remove all stopped containers
-docker container prune 
-
-#restart container
-docker start compassionate_payne
-# docker attach CONTAINER
-docker attach compassionate_payne / docker start -a compassionate_payne
-
-# run container in localhost:3000
-docker run -p 3000:80 3091f996d379b9fd33a81a29dbd2f31a86ff5e97a6e6a75aada753eac834425
-
-# you can attach yourself to a detached container 
-docker run -p 3000:80 -d 3091f996d379b9fd33a81a29dbd2f31a86ff5e97a6e6a75aada753eac834425
-
-# restart container
-docker ps -a
-
-# Create an Anonymous Volume inside a Container
-docker run -v /path/in/container IMAGE :
-# Create a Named Volume (named some-name ) inside a Container
-docker run -v some-name:/path/in/container IMAGE
-#  Create a Bind Mount and connect a local path on your host machine to some path in the Container
-docker run -v /path/on/your/host/machine:path/in/container IMAGE
-# List all currently active / stored Volumes (by all Containers)
-docker volume ls
-# Remove a Volume by it's name (or ID)
-docker volume rm VOL_NAME
-# Remove all unused Volumes
-docker volume prune
-```
+![img.png](img.png)
 
 ### Appendix
-- Find the images: https://hub.docker.com/search?q=
-- 
+- [Find the images](https://hub.docker.com/search?q=)
+- [Docker command cheatsheet](https://dockerlabs.collabnix.com/docker/cheatsheet/)
